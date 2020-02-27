@@ -9,6 +9,8 @@ import android.widget.TextView;
 
 import com.bawei.wangguanhua2020224.R;
 import com.bawei.wangguanhua2020224.bean.Bean;
+import com.bawei.wangguanhua2020224.bean.ListBean;
+import com.bumptech.glide.Glide;
 import com.squareup.picasso.Picasso;
 
 import java.util.List;
@@ -21,9 +23,9 @@ import java.util.List;
  */
 public class BeanBaseAdapter extends BaseAdapter {
     Context context;
-    List<Bean.ResultsBean.NewsistBean> list;
+    List<ListBean.ResultBean.PzshBean.CommodityListBeanX> list;
 
-    public BeanBaseAdapter(Context context, List<Bean.ResultsBean.NewsistBean> list) {
+    public BeanBaseAdapter(Context context, List<ListBean.ResultBean.PzshBean.CommodityListBeanX> list) {
         this.context = context;
         this.list = list;
     }
@@ -50,24 +52,24 @@ public class BeanBaseAdapter extends BaseAdapter {
         //判断
         if(convertView==null){
             //加载布局
-         convertView= View.inflate(context, R.layout.item,null);
+       convertView=  View.inflate(context,R.layout.item,null);
          //关联控件
-         holder.tt=convertView.findViewById(R.id.tt);
-         holder.tv=convertView.findViewById(R.id.tv);
-         holder.iv=convertView.findViewById(R.id.iv);
+         holder.tt=convertView.findViewById(R.id.life_tt);
+         holder.tv=convertView.findViewById(R.id.life_pirce);
+         holder.iv=convertView.findViewById(R.id.life_iv);
          convertView.setTag(holder);
         }else {
             holder= (ViewHolder) convertView.getTag();
         }
-        Bean.ResultsBean.NewsistBean bean = list.get(position);
         //获取集合对应的数据
-        String title = bean.getTitle();
-        String content = bean.getContent();
-        String image = bean.getImage();
+        ListBean.ResultBean.PzshBean.CommodityListBeanX bean = list.get(position);
+        String name = bean.getCommodityName();
+        String pic = bean.getMasterPic();
+        int price = bean.getPrice();
         //设置值
-        holder.tt.setText(title);
-        holder.tv.setText(content);
-        Picasso.get().load(image).into(holder.iv);
+        holder.tt.setText(name);
+        holder.tv.setText(price+"");
+        Glide.with(context).load(pic).into(holder.iv);
         return convertView;
     }
     private class ViewHolder{
