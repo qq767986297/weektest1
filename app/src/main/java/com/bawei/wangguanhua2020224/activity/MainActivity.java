@@ -12,6 +12,8 @@ import android.widget.ListView;
 
 import com.bawei.wangguanhua2020224.R;
 import com.bawei.wangguanhua2020224.adapter.BeanBaseAdapter;
+import com.bawei.wangguanhua2020224.adapter.HotAdapter;
+import com.bawei.wangguanhua2020224.adapter.MlssAdapter;
 import com.bawei.wangguanhua2020224.base.BaseActivity;
 import com.bawei.wangguanhua2020224.bean.BannerBean;
 import com.bawei.wangguanhua2020224.bean.Bean;
@@ -37,6 +39,8 @@ public class MainActivity extends BaseActivity implements IHomeContract.IView {
     private XBanner xb;
     private GridView lv;
     private HomePresenter homePresenter;
+    private ListView fslv;
+    private ListView htlv;
 
     @Override
     protected int getLayoult() {
@@ -48,6 +52,8 @@ public class MainActivity extends BaseActivity implements IHomeContract.IView {
         //找控件
         xb = findViewById(R.id.xb);
         lv = findViewById(R.id.lv);
+        fslv = findViewById(R.id.fashionlist);
+        htlv = findViewById(R.id.hotlist);
     }
 
     @Override
@@ -102,6 +108,18 @@ public class MainActivity extends BaseActivity implements IHomeContract.IView {
         //创建适配器
         BeanBaseAdapter bba = new BeanBaseAdapter(this, commodityList);
         lv.setAdapter(bba);
+        //获取热销商品集合
+        ListBean.ResultBean.RxxpBean rxxp = result.getRxxp();
+        List<ListBean.ResultBean.RxxpBean.CommodityListBean> hotlist = rxxp.getCommodityList();
+        HotAdapter hotAdapter = new HotAdapter(this, hotlist);
+        htlv.setAdapter(hotAdapter);
+        //获取魔力商品集合
+        ListBean.ResultBean.MlssBean mlss = result.getMlss();
+        List<ListBean.ResultBean.MlssBean.CommodityListBeanXX> fashionlist = mlss.getCommodityList();
+        //创建适配器
+        MlssAdapter adapter = new MlssAdapter(this, fashionlist);
+        fslv.setAdapter(adapter);
+
         //设置条目点击事件
         lv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
