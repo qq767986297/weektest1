@@ -7,7 +7,13 @@
     android:background="@android:color/white"
     android:orientation="vertical"
     tools:context=".activity.MainActivity">
-
+    <com.bawei.wangguanhua2020224.custom.CustomStemView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+    <com.bawei.wangguanhua2020224.custom.CustomViewGroup
+        android:layout_width="match_parent"
+        android:id="@+id/cvg"
+        android:layout_height="wrap_content"></com.bawei.wangguanhua2020224.custom.CustomViewGroup>
  <ScrollView
      android:layout_width="match_parent"
      android:layout_height="match_parent">
