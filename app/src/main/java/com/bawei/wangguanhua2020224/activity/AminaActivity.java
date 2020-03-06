@@ -48,5 +48,7 @@ public class AminaActivity extends BaseActivity {
                 translationY.start();
             }
         });
+        Object obj=null;
+        obj.toString();
     }
 }
